@@ -1,0 +1,5 @@
+steps:
+  - label: ":rocket: Build and Deploy to SIT"
+    command: ops/build-and-deploy.sh
+    agents:
+      queue: clm-dev-dflt

@@ -1,0 +1,34 @@
+{
+  "name": "@slack/slack-bolt-sdk-example",
+  "version": "1.1.0",
+  "private": true,
+  "description": "A basic example of using the Slack Bolt ⚡️ SDK",
+  "main": "day-ops-bot/app.js",
+  "scripts": {
+    "test": "mocha tests/unit/",
+    "start": "node day-ops-bot/app.js",
+    "dev": "nodemon app.js",
+    "runlambda": "node -e \"require('./src/app').lambdaHandler()\""
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "author": "Slack Technologies, Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/bolt": "^3.3.0",
+    "@slack/web-api": "^6.2.4",
+    "aws-sdk": "^2.934.0",
+    "dotenv": "^10.0.0",
+    "uuid": "^3.3.2",
+    "ws": "^7.5.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.3",
+    "utf-8-validate": "^5.0.5"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  }
+}

@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "day-ops-bot"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1i6wa8xcpoe74"
+s3_prefix = "day-ops-bot"
+region = "ap-southeast-2"
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"

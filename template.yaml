@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  day-ops-bot is a slack bot which automates the weekly scheduling of the day ops team member on call.
+
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:  
+  DayOpsBotFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ['lambda.amazonaws.com']
+            Action: ['sts:AssumeRole']
+      Policies:
+        - PolicyName: DayOpsBotRolePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+                - 'ssm:GetParameter'
+                - 'ssm:GetParameterByPath'
+              Resource:
+                - !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/day-ops-bot/slack-bot-config'
+            - Effect: Allow
+              Action:
+                - 's3:*'
+              Resource: !Sub 'arn:aws:s3:::betelgeuse-day-ops-bot/current-member-on-call-id.txt' 
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"  
+
+  DayOpsBot:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: A Lambda function that rotates on-call members in a slack channel.
+      Runtime: nodejs14.x
+      Handler: src/app.lambdaHandler
+      Role: !GetAtt DayOpsBotFunctionRole.Arn
+      # This property associates this Lambda function with a CloudWatch event
+      # scheduled to run every Monday at 8am AEST (cron requires GMT time).
+      Events:
+        CloudWatchEvent:
+          Type: Schedule
+          Properties:
+            Schedule: cron(00 22 ? * SUN *)
+      MemorySize: 128
+      Timeout: 100

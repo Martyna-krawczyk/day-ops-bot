@@ -13,7 +13,7 @@ The application uses several AWS resources, including Lambda, Cloudwatch, S3 Buc
 
 ## AWS Resources
 
-### SIT - greedy-chickens-development-admin
+### SIT
 
 The application requires the slack channelId and usergroupId, as well as the slack API tokens to run - all of which are stored as json in the SSM Parameter Store (/day-ops-bot/slack-bot-config).
 The ID of the current user on call is stored in a .txt file in an S3 Bucket (day-ops-bot),

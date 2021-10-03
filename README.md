@@ -16,8 +16,8 @@ The application uses several AWS resources, including Lambda, Cloudwatch, S3 Buc
 ### SIT - greedy-chickens-development-admin
 
 The application requires the slack channelId and usergroupId, as well as the slack API tokens to run - all of which are stored as json in the SSM Parameter Store (/day-ops-bot/slack-bot-config).
-The ID of the current user on call is stored in a .txt file in an S3 Bucket (betelgeuse-day-ops-bot),
-The Lambda Function (day-ops-bot-DayOpsBot-WM0mIoDsVzYU) is created as defined in the template.yaml.
+The ID of the current user on call is stored in a .txt file in an S3 Bucket (day-ops-bot),
+The Lambda Function (day-ops-bot) is created as defined in the template.yaml.
 
 ## Installation
 
